@@ -11,9 +11,6 @@ class AppColors {
   static const Color red = Color(0xFFE57373);
   static const Color sampleColor = Color(0xffBBDBFE);
   // static const Color backColor = Color(0xffBBDBFE);
-  // static const Color backTableColor = Color(0xffBBDBFE);
-  // static const Color emptyTableColor = Color(0xffBBDBFE);
-  // static const Color amountColor = Color(0xffBBDBFE);
 
 }
 
