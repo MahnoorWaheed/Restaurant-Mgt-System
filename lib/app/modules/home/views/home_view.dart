@@ -39,7 +39,13 @@ class HomeView extends GetView<HomeController> {
                     top: 0.h,
                     child: PopupMenuButton(
                       onSelected: (value) {
-                        Get.toNamed(Routes.CART_VIEW);
+                        switch (value) {
+                          case 1:
+                            Get.toNamed(Routes.CART_VIEW);
+                            break;
+                          case 2:
+                            break;
+                        }
                       },
                       iconSize: 40.h,
                       itemBuilder: (context) => [
