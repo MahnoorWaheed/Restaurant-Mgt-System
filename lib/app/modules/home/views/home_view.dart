@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -41,9 +43,380 @@ class HomeView extends GetView<HomeController> {
                       onSelected: (value) {
                         switch (value) {
                           case 1:
-                            Get.toNamed(Routes.CART_VIEW);
+                            showDialog<void>(
+                              context: context,
+                              barrierDismissible:
+                                  false, // user must tap button!
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Center(child: Text('Add New Portion')),
+                                  content: Container(
+                                    height: Get.height * 0.2,
+                                    width: Get.width - 50.w,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        TextField(
+                                          decoration: InputDecoration(
+                                            hintText: 'Enter portion name',
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 1.0),
+                                            ),
+                                          ),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            controller.queryPortion();
+                                            Get.back();
+                                          },
+                                          child: Container(
+                                            height: Get.height * 0.07,
+                                            decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color: Colors.green
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 3,
+                                                      blurRadius: 7,
+                                                      offset: Offset(0, 2)),
+                                                ]),
+                                            child: Center(
+                                                child: Text(
+                                              'ADD',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.sp,
+                                                  color: Colors.white),
+                                            )),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
                             break;
                           case 2:
+                            showDialog<void>(
+                              context: context,
+                              barrierDismissible:
+                                  false, // user must tap button!
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Center(child: Text('Layout Change')),
+                                  content: Container(
+                                    height: Get.height * 0.25,
+                                    width: Get.width - 50.w,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            ColumnCountButton(
+                                              title: '1',
+                                              onTap: () {
+                                                controller
+                                                    .changeCrossAxisCount(1);
+                                              },
+                                            ),
+                                            ColumnCountButton(
+                                              title: '2',
+                                              onTap: () {
+                                                controller
+                                                    .changeCrossAxisCount(2);
+                                              },
+                                            ),
+                                            ColumnCountButton(
+                                              title: '3',
+                                              onTap: () {
+                                                controller
+                                                    .changeCrossAxisCount(3);
+                                              },
+                                            ),
+                                            ColumnCountButton(
+                                              title: '4',
+                                              onTap: () {
+                                                controller
+                                                    .changeCrossAxisCount(4);
+                                              },
+                                            ),
+                                            ColumnCountButton(
+                                              title: '5',
+                                              onTap: () {
+                                                controller
+                                                    .changeCrossAxisCount(5);
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Back Color',
+                                              style: TextStyle(fontSize: 10.sp),
+                                            ),
+                                            Expanded(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffe0f7fa',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeBackColor(
+                                                              0xffe0f7fa);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffFFFFFF',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeBackColor(
+                                                              0xffFFFFFF);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xfffff9c4',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeBackColor(
+                                                              0xfffff9c4);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xff90caf9',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeBackColor(
+                                                              0xff90caf9);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Back Table Color',
+                                              style: TextStyle(fontSize: 10.sp),
+                                            ),
+                                            Expanded(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffe8f5e9',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeBackTableColor(
+                                                              0xffe8f5e9);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffbdbdbd',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeBackTableColor(
+                                                              0xffbdbdbd);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffffe082',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeBackTableColor(
+                                                              0xffffe082);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xff9fa8da',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeBackTableColor(
+                                                              0xff9fa8da);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Empty Table Color',
+                                              style: TextStyle(fontSize: 10.sp),
+                                            ),
+                                            Expanded(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffb2ebf2',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeEmptyTableColor(
+                                                              0xffb2ebf2);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffeceff1',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeEmptyTableColor(
+                                                              0xffeceff1);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xfffff59d',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeEmptyTableColor(
+                                                              0xfffff59d);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffc5cae9',
+                                                    //categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeEmptyTableColor(
+                                                              0xffc5cae9);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Amount Color',
+                                              style: TextStyle(fontSize: 10.sp),
+                                            ),
+                                            Expanded(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffe0e0e0',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeAmountColor(
+                                                              0xffe0e0e0);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xff000000',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeAmountColor(
+                                                              0xff000000);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xffef6c00',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeAmountColor(
+                                                              0xffef6c00);
+                                                    },
+                                                  ),
+                                                  ColorCategory(
+                                                    // controller: controller,
+                                                    color: '0xff3f51b5',
+                                                    // categoty: '',
+                                                    onTap: () {
+                                                      controller
+                                                          .changeAmountColor(
+                                                              0xff3f51b5);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Go Back'),
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                             break;
                         }
                       },
@@ -66,16 +439,19 @@ class HomeView extends GetView<HomeController> {
                   nameController: nameController,
                   priceController: priceController,
                   homeController: controller,
+                  onTap: () {},
                 ),
                 GridViewTable(
                   nameController: nameController,
                   priceController: priceController,
                   homeController: controller,
+                  onTap: () {},
                 ),
                 GridViewTable(
                   nameController: nameController,
                   priceController: priceController,
                   homeController: controller,
+                  onTap: () {},
                 ),
               ],
             ),
@@ -86,14 +462,76 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
+class ColumnCountButton extends StatelessWidget {
+  const ColumnCountButton({
+    required this.onTap,
+    required this.title,
+  });
+  final VoidCallback onTap;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: Get.height * 0.04,
+        width: Get.height * 0.04,
+        decoration: BoxDecoration(
+          color: Colors.indigo,
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: Text(title,
+              style: AppTextStyle.kTitle.copyWith(
+                fontSize: 10.sp,
+                color: Colors.white,
+              )),
+        ),
+      ),
+    );
+  }
+}
+
+class ColorCategory extends StatelessWidget {
+  const ColorCategory({
+    // required this.controller,
+    // required this.categoty,
+    required this.color,
+    required this.onTap,
+  });
+
+  // final HomeController controller;
+  final String color;
+  // final String categoty;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: Get.height * 0.04,
+        width: Get.width * 0.08,
+        decoration: BoxDecoration(
+          color: Color(int.parse(color)),
+          border: Border.all(color: Colors.black),
+        ),
+      ),
+    );
+  }
+}
+
 class GridViewTable extends StatelessWidget {
   final TextEditingController nameController;
   final TextEditingController priceController;
   final HomeController homeController;
+  final VoidCallback onTap;
   GridViewTable({
     required this.nameController,
     required this.priceController,
     required this.homeController,
+    required this.onTap,
   });
   @override
   Widget build(BuildContext context) {
@@ -178,33 +616,58 @@ class GridViewTable extends StatelessWidget {
               ],
             ),
           ),
-          GridView.count(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            crossAxisCount: 5,
-            childAspectRatio: 1.0,
-            padding: EdgeInsets.all(4.0),
-            mainAxisSpacing: 4.0,
-            crossAxisSpacing: 4.0,
-            children: List.generate(7, (index) {
-              return GestureDetector(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8.h, vertical: 8.h),
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(10.r)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Name $index'),
-                      Text('Rs. 20$index'),
-                      Text('Qty. ${index + 1}'),
-                    ],
+          Obx(
+            () => GridView.count(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              crossAxisCount: homeController.crossAxisCount.value,
+              childAspectRatio: 1.0,
+              padding: EdgeInsets.all(4.0),
+              mainAxisSpacing: 4.0,
+              crossAxisSpacing: 4.0,
+              children: List.generate(7, (index) {
+                return GestureDetector(
+                    child: Obx(
+                  () => Container(
+                    margin:
+                        EdgeInsets.symmetric(horizontal: 8.h, vertical: 8.h),
+                    padding: EdgeInsets.only(top: 5.h),
+                    decoration: BoxDecoration(
+                        color: homeController.backColor.value,
+                        borderRadius: BorderRadius.circular(10.r)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Name $index',
+                            style: AppTextStyle.kItemName
+                                .copyWith(fontSize: 11.sp)),
+                        Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 3.w, vertical: 4.h),
+                            decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(10.r),
+                                  bottomLeft: Radius.circular(10.r),
+                                )),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '20$index',
+                                  style: TextStyle(
+                                      color: homeController.amountColor.value),
+                                ),
+                                Text('${index + 1}'),
+                              ],
+                            ))
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }),
-          ),
+                ));
+              }),
+            ),
+          )
         ],
       ),
     );

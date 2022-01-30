@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rest_mgt_systm/app/data/services/datebase_helper.dart';
 import 'package:rest_mgt_systm/app/modules/constants/constant.dart';
@@ -10,10 +13,33 @@ class HomeController extends GetxController {
   final dbHelper = DatabaseHelper.instance;
   var datalist = [];
 
-  var backColor = AppColors.sampleColor.obs;
+  var backColor = Color(0xffbbdbfe).obs;
   var backTableColor = AppColors.sampleColor.obs;
   var emptyTableColor = AppColors.sampleColor.obs;
   var amountColor = AppColors.sampleColor.obs;
+  var crossAxisCount = 2.obs;
+
+  void changeCrossAxisCount(value) {
+    crossAxisCount.value = value;
+  }
+
+  void changeBackColor(color) {
+    log('I am here1 ${backColor.value}');
+    backColor.value = Color(color);
+    log('I am here2 ${backColor.value}');
+  }
+
+  void changeBackTableColor(color) {
+    backTableColor.value = Color(color);
+  }
+
+  void changeEmptyTableColor(color) {
+    emptyTableColor.value = Color(color);
+  }
+
+  void changeAmountColor(color) {
+    amountColor.value = Color(color);
+  }
 
   void insertPortion(String itemName, int itemPrice) async {
     // row to insert

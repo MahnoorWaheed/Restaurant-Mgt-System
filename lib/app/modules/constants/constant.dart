@@ -24,9 +24,8 @@ class AppTextStyle {
     color: AppColors.black,
     fontWeight: FontWeight.bold,
   );
-  static const kWinBtnTextStyle = TextStyle(
-    color: AppColors.blue,
-    fontSize: 20,
+  static const kItemName = TextStyle(
+    color: AppColors.black,
     fontWeight: FontWeight.bold,
   );
   static const kSmallDeleteBtnTextStyle = TextStyle(
