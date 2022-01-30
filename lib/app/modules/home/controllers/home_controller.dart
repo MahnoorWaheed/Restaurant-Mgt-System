@@ -11,9 +11,9 @@ class HomeController extends GetxController {
   final count = 0.obs;
 
   final dbHelper = DatabaseHelper.instance;
-  var datalist = [];
+  var datalist = [].obs;
 
-  var backColor = Color(0xffbbdbfe).obs;
+  var backColor = AppColors.white.obs;
   var backTableColor = AppColors.sampleColor.obs;
   var emptyTableColor = AppColors.sampleColor.obs;
   var amountColor = AppColors.sampleColor.obs;
@@ -46,16 +46,19 @@ class HomeController extends GetxController {
     Map<String, dynamic> row = {
       DatabaseHelper.dataName: itemName,
       DatabaseHelper.dataPrice: itemPrice,
+      DatabaseHelper.dataQty: 1,
       DatabaseHelper.portionId: 3,
+      DatabaseHelper.portionName: 'Burger',
     };
     final id = await dbHelper.insert(row);
+    log('message');
     print('inserted row id: $id');
   }
 
   void queryPortion() async {
     final allRows = await dbHelper.queryAll();
     print('query all rows: ${allRows[0]['dataName']}');
-    datalist = allRows;
+    datalist.value = allRows;
     // allRows.forEach(print);
   }
 

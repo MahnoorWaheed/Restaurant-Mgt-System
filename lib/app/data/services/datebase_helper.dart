@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -8,15 +9,16 @@ class DatabaseHelper {
   static final _dbVersion = 1;
   static final _tableOne = 'datas';
   static final _tableTwo = 'portion';
-  // static final _tableThree = 'my_table';
   //table 1
   static final dataId = 'dataId';
   static final dataName = 'dataName';
   static final dataPrice = 'dataPrice';
+  static final dataQty = 'dataQty';
   static final portionId = 'portionId';
+  static final portionName = 'portionName';
   //table 2
   static final portId = 'portionId';
-  static final portName = 'postionName';
+  static final portName = 'postName';
 
   //Making it singleton class
   DatabaseHelper._privateConstructor();
@@ -46,7 +48,9 @@ class DatabaseHelper {
             $dataId INTEGER PRIMARY KEY,
             $dataName TEXT NOT NULL,
             $dataPrice TEXT NOT NULL,
-            $portionId INTEGER NOT NULL
+            $dataQty TEXT NOT NULL,
+            $portionId INTEGER NOT NULL,
+            $portionName TEXT NOT NULL
           )
           ''');
     await db.execute('''

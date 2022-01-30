@@ -495,15 +495,11 @@ class ColumnCountButton extends StatelessWidget {
 
 class ColorCategory extends StatelessWidget {
   const ColorCategory({
-    // required this.controller,
-    // required this.categoty,
     required this.color,
     required this.onTap,
   });
 
-  // final HomeController controller;
   final String color;
-  // final String categoty;
   final VoidCallback onTap;
 
   @override
@@ -535,141 +531,153 @@ class GridViewTable extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5.h),
-      padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Portion Name',
-                  style: AppTextStyle.kPortionName.copyWith(fontSize: 15.sp),
-                ),
-                PopupMenuButton(
-                  onSelected: (value) {
-                    // Get.toNamed(Routes.CART_VIEW);
-                    switch (value) {
-                      case 1:
-                        // do something
-                        showDialog<void>(
-                          context: context,
-                          barrierDismissible: false, // user must tap button!
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Add Item to this portion'),
-                              content: Container(
-                                height: Get.height * 0.15,
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 10.w, horizontal: 10.w),
-                                child: Column(
-                                  children: [
-                                    TextField(
-                                      controller: nameController,
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter Item Name',
-                                      ),
+    return Obx(() => Container(
+          margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          color: homeController.backColor.value,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Portion Name',
+                      style:
+                          AppTextStyle.kPortionName.copyWith(fontSize: 15.sp),
+                    ),
+                    PopupMenuButton(
+                      onSelected: (value) {
+                        // Get.toNamed(Routes.CART_VIEW);
+                        switch (value) {
+                          case 1:
+                            // do something
+                            showDialog<void>(
+                              context: context,
+                              barrierDismissible:
+                                  false, // user must tap button!
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Add Item to this portion'),
+                                  content: Container(
+                                    height: Get.height * 0.15,
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10.w, horizontal: 10.w),
+                                    child: Column(
+                                      children: [
+                                        TextField(
+                                          controller: nameController,
+                                          decoration: InputDecoration(
+                                            hintText: 'Enter Item Name',
+                                          ),
+                                        ),
+                                        TextField(
+                                          controller: priceController,
+                                          decoration: InputDecoration(
+                                            hintText: 'Enter Price',
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    TextField(
-                                      controller: priceController,
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter Price',
-                                      ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Approve'),
+                                      onPressed: () {
+                                        homeController.insertPortion(
+                                            nameController.text,
+                                            int.parse(priceController.text));
+                                        Get.back();
+                                      },
                                     ),
                                   ],
-                                ),
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: const Text('Approve'),
-                                  onPressed: () {
-                                    homeController.insertPortion(
-                                        nameController.text,
-                                        int.parse(priceController.text));
-                                    Get.back();
-                                  },
-                                ),
-                              ],
+                                );
+                              },
                             );
-                          },
-                        );
-                        break;
-                      case 2:
-                        // do something else
-                        break;
-                      case 3:
-                        // do something else
-                        break;
-                    }
-                  },
-                  iconSize: 25.h,
-                  itemBuilder: (context) => [
-                    PopupMenuItem(child: Text("Add Item of burger"), value: 1),
-                    PopupMenuItem(
-                        child: Text("Edit Item Group Name"), value: 2),
-                    PopupMenuItem(child: Text("Delete Item Group"), value: 3)
-                  ],
-                )
-              ],
-            ),
-          ),
-          Obx(
-            () => GridView.count(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              crossAxisCount: homeController.crossAxisCount.value,
-              childAspectRatio: 1.0,
-              padding: EdgeInsets.all(4.0),
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              children: List.generate(7, (index) {
-                return GestureDetector(
-                    child: Obx(
-                  () => Container(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 8.h, vertical: 8.h),
-                    padding: EdgeInsets.only(top: 5.h),
-                    decoration: BoxDecoration(
-                        color: homeController.backColor.value,
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Name $index',
-                            style: AppTextStyle.kItemName
-                                .copyWith(fontSize: 11.sp)),
-                        Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 3.w, vertical: 4.h),
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(10.r),
-                                  bottomLeft: Radius.circular(10.r),
-                                )),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '20$index',
-                                  style: TextStyle(
-                                      color: homeController.amountColor.value),
-                                ),
-                                Text('${index + 1}'),
-                              ],
-                            ))
+                            break;
+                          case 2:
+                            // do something else
+                            break;
+                          case 3:
+                            // do something else
+                            break;
+                        }
+                      },
+                      iconSize: 25.h,
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                            child: Text("Add Item of burger"), value: 1),
+                        PopupMenuItem(
+                            child: Text("Edit Item Group Name"), value: 2),
+                        PopupMenuItem(
+                            child: Text("Delete Item Group"), value: 3)
                       ],
-                    ),
-                  ),
-                ));
-              }),
-            ),
-          )
-        ],
-      ),
-    );
+                    )
+                  ],
+                ),
+              ),
+              Obx(
+                () => GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  crossAxisCount: homeController.crossAxisCount.value,
+                  childAspectRatio: 1.0,
+                  padding: EdgeInsets.all(4.0),
+                  mainAxisSpacing: 4.0,
+                  crossAxisSpacing: 4.0,
+                  children:
+                      List.generate(homeController.datalist.length, (index) {
+                    return GestureDetector(
+                        child: Obx(
+                      () => Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 8.h, vertical: 8.h),
+                        padding: EdgeInsets.only(top: 5.h),
+                        decoration: BoxDecoration(
+                            color: homeController.backTableColor.value,
+                            borderRadius: BorderRadius.circular(10.r)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(homeController.datalist[index]['dataName'],
+                                // 'Name $index',
+                                style: AppTextStyle.kItemName
+                                    .copyWith(fontSize: 11.sp)),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 3.w, vertical: 4.h),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(10.r),
+                                    bottomLeft: Radius.circular(10.r),
+                                  )),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    homeController.datalist[index]['dataPrice'],
+                                    style: TextStyle(
+                                        color:
+                                            homeController.amountColor.value),
+                                  ),
+                                  Text('1'
+                                      // homeController.datalist[index]['dataQty'],
+                                      ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ));
+                  }),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
