@@ -70,6 +70,8 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> queryAll() async {
     Database db = await instance.database;
+    var dats = await db.query('restaurant.TABLES');
+    print(dats);
     return await db.query(_tableOne);
   }
 
