@@ -427,6 +427,12 @@ class HomeView extends GetView<HomeController> {
                             child: Text("Change Layout Setting"), value: 2)
                       ],
                     )),
+                ElevatedButton(
+                  onPressed: () {
+                    controller.queryPortion();
+                  },
+                  child: Text('hello'),
+                )
               ],
             ),
           ),

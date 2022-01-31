@@ -24,9 +24,7 @@ class HomeController extends GetxController {
   }
 
   void changeBackColor(color) {
-    log('I am here1 ${backColor.value}');
     backColor.value = Color(color);
-    log('I am here2 ${backColor.value}');
   }
 
   void changeBackTableColor(color) {
@@ -51,15 +49,13 @@ class HomeController extends GetxController {
       DatabaseHelper.portionName: 'Burger',
     };
     final id = await dbHelper.insert(row);
-    log('message');
-    print('inserted row id: $id');
+    log('inserted row id: $id');
   }
 
   void queryPortion() async {
     final allRows = await dbHelper.queryAll();
     print('query all rows: ${allRows[0]['dataName']}');
     datalist.value = allRows;
-    // allRows.forEach(print);
   }
 
   // void _updatePortion() async {
