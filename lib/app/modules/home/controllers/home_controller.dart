@@ -39,12 +39,12 @@ class HomeController extends GetxController {
     amountColor.value = Color(color);
   }
 
-  void insertPortion(String itemName, int itemPrice) async {
+  void insertPortion(String itemName, int itemPrice, int itemqty) async {
     // row to insert
     Map<String, dynamic> row = {
       DatabaseHelper.dataName: itemName,
       DatabaseHelper.dataPrice: itemPrice,
-      DatabaseHelper.dataQty: 0,
+      DatabaseHelper.dataQty: itemqty,
       DatabaseHelper.portionId: 3,
       DatabaseHelper.portionName: 'Burger',
     };
@@ -76,12 +76,12 @@ class HomeController extends GetxController {
     print('deleted $rowsDeleted row(s): row $id');
   }
 
-  @override
-  void onInit() {
-    insertPortion('chicken', 70);
-    queryPortion();
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   insertPortion('Nuggets',600,12 );
+  //   queryPortion();
+  //   super.onInit();
+  // }
 
   @override
   void onReady() {

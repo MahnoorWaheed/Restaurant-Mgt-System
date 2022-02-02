@@ -8,6 +8,7 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController qtyController= TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -419,16 +420,21 @@ class HomeView extends GetView<HomeController> {
                       },
                       iconSize: 40.h,
                       itemBuilder: (context) => [
-                        PopupMenuItem(child: Text("Add New Portion"), value: 1),
+                        PopupMenuItem(child: Text("Add New Portion"), value: 1, 
+                        
+                        ),
                         PopupMenuItem(
                             child: Text("Change Layout Setting"), value: 2)
                       ],
                     )),
-                ElevatedButton(
-                  onPressed: () {
-                    controller.queryPortion();
-                  },
-                  child: Text('hello'),
+                Positioned(
+                  top: 100,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      controller.queryPortion();
+                    },
+                    child: Text('hello'),
+                  ),
                 )
               ],
             ),
@@ -441,6 +447,7 @@ class HomeView extends GetView<HomeController> {
                 GridViewTable(
                   nameController: nameController,
                   priceController: priceController,
+                  qtyController: qtyController,
                   homeController: controller,
                   onTap: () {},
                 ),
@@ -448,12 +455,14 @@ class HomeView extends GetView<HomeController> {
                   nameController: nameController,
                   priceController: priceController,
                   homeController: controller,
+                  qtyController: qtyController,
                   onTap: () {},
                 ),
                 GridViewTable(
                   nameController: nameController,
                   priceController: priceController,
                   homeController: controller,
+                  qtyController: qtyController,
                   onTap: () {},
                 ),
               ],
@@ -523,6 +532,7 @@ class ColorCategory extends StatelessWidget {
 
 class GridViewTable extends StatelessWidget {
   final TextEditingController nameController;
+  final TextEditingController qtyController;
   final TextEditingController priceController;
   final HomeController homeController;
   final VoidCallback onTap;
@@ -531,6 +541,7 @@ class GridViewTable extends StatelessWidget {
     required this.priceController,
     required this.homeController,
     required this.onTap,
+    required this.qtyController
   });
   @override
   Widget build(BuildContext context) {
@@ -547,7 +558,7 @@ class GridViewTable extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Portion Name',
+                    'Fast Food',
                     style: AppTextStyle.kPortionName.copyWith(fontSize: 15.sp),
                   ),
                   PopupMenuButton(
@@ -563,7 +574,7 @@ class GridViewTable extends StatelessWidget {
                               return AlertDialog(
                                 title: Text('Add Item to this portion'),
                                 content: Container(
-                                  height: Get.height * 0.15,
+                                  height: Get.height * 0.30,
                                   padding: EdgeInsets.symmetric(
                                       vertical: 10.w, horizontal: 10.w),
                                   child: Column(
@@ -580,6 +591,12 @@ class GridViewTable extends StatelessWidget {
                                           hintText: 'Enter Price',
                                         ),
                                       ),
+                                       TextField(
+                                        controller: qtyController,
+                                        decoration: InputDecoration(
+                                          hintText: 'Enter Quantity',
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -589,7 +606,10 @@ class GridViewTable extends StatelessWidget {
                                     onPressed: () {
                                       homeController.insertPortion(
                                           nameController.text,
-                                          int.parse(priceController.text));
+                                          int.parse(priceController.text), 
+                                          int.parse(qtyController.text)
+                                          
+                                          );
                                       Get.back();
                                     },
                                   ),
@@ -612,7 +632,11 @@ class GridViewTable extends StatelessWidget {
                           child: Text("Add Item of burger"), value: 1),
                       PopupMenuItem(
                           child: Text("Edit Item Group Name"), value: 2),
-                      PopupMenuItem(child: Text("Delete Item Group"), value: 3)
+                      PopupMenuItem(child: Text("Delete Item Group"), value: 3,
+                      onTap: (){
+                        homeController.deletePortion();
+                      },
+                      )
                     ],
                   )
                 ],
