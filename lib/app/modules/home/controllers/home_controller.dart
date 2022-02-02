@@ -44,7 +44,7 @@ class HomeController extends GetxController {
     Map<String, dynamic> row = {
       DatabaseHelper.dataName: itemName,
       DatabaseHelper.dataPrice: itemPrice,
-      DatabaseHelper.dataQty: 1,
+      DatabaseHelper.dataQty: 0,
       DatabaseHelper.portionId: 3,
       DatabaseHelper.portionName: 'Burger',
     };
